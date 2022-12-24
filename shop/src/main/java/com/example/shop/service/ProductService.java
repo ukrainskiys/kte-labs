@@ -11,4 +11,5 @@ public interface ProductService {
 	List<ProductDTO> getAllProducts();
 	ProductInformationResponse getProductInfo(long clientId, long productId);
 	CalculateFinalPriceResponse calculateFinalPrice(long clientId, List<SalePair> products);
+	void productEvaluation(long clientId, long productId, Integer rating);
 }

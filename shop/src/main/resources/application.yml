@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/shop
+    url: jdbc:postgresql://localhost:5431/shop
     username: shop
     password: shop
 
@@ -9,3 +9,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+server:
+  error:
+    include-message: always
+    include-binding-errors: always

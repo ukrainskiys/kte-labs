@@ -71,4 +71,9 @@ public class ProductServiceImpl implements ProductService {
 		long sum = calculates.stream().mapToLong(CalculationResult::getSumKopecks).sum();
 		return CalculateFinalPriceResponse.builder().priceKopecks(sum).build();
 	}
+
+	@Override
+	public void productEvaluation(long clientId, long productId, Integer rating) {
+		ratingService.productEvaluation(clientId, productId, rating);
+	}
 }

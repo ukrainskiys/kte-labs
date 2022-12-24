@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Builder
-public class ProductInformationResponse extends AbstractResponse {
+public class ProductInformationResponse {
 	private String description;
 	@JsonProperty("average_rating")
 	private BigDecimal averageRating;
