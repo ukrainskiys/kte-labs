@@ -10,12 +10,12 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class ProductDTO {
 	private Long id;
-	private String description;
+	private String name;
 	private BigDecimal price;
 
 	public ProductDTO(Product product) {
 		this.id = product.getId();
-		this.description = product.getDescription();
+		this.name = product.getName();
 		this.price = product.getPrice();
 	}
 }

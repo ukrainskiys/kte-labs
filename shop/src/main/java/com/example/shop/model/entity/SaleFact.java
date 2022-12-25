@@ -16,7 +16,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "sale_facts")
-@NoArgsConstructor
 public class SaleFact {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +26,7 @@ public class SaleFact {
 	private Client client;
 	private LocalDateTime saleDate;
 	private String checkNumber;
-	@JdbcTypeCode(SqlTypes.JSON)
-	private List<Position> positions;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "product_id")
+	private List<SaleFactPosition> positions;
 }

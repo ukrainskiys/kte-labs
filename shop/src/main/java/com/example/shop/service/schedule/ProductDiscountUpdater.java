@@ -39,8 +39,8 @@ public class ProductDiscountUpdater implements Updater {
 		int discount = 5 + random.nextInt(6);
 		String query = """
 			START TRANSACTION;
-			TRUNCATE TABLE product_disconds;
-			INSERT INTO product_disconds VALUES (1, ?, ?)
+			TRUNCATE TABLE product_discount;
+			INSERT INTO product_discount VALUES (?, ?);
 			COMMIT;
 			""";
 		jdbcTemplate.update(query, discount, productId);

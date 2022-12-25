@@ -24,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void updateClientDiscounts(long clientId, int firstDiscount, int secondDiscount) {
+	public void updateClientDiscounts(long clientId, Integer firstDiscount, Integer secondDiscount) {
 		Client client = clientRepository.findById(clientId).orElseThrow(() -> new ClientNotFoundException(clientId));
 		client.setIndividualDiscountFirst(firstDiscount);
 		client.setIndividualDiscountSecond(secondDiscount);

@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface ClientService {
 	List<Client> getAllClients();
 	Client getClientById(long clientId);
-	void updateClientDiscounts(long clientId, int firstDiscount, int secondDiscount);
+	void updateClientDiscounts(long clientId, Integer firstDiscount, Integer secondDiscount);
 }

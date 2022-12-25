@@ -1,5 +1,6 @@
 package com.example.shop.service.schedule;
 
+import com.example.shop.model.ProductDiscount;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -9,12 +10,10 @@ import org.springframework.context.ApplicationEvent;
  */
 @Getter
 public class NewDiscountingProductEvent extends ApplicationEvent {
-	private final long productId;
-	private final int discount;
+	private final ProductDiscount productDiscount;
 
 	public NewDiscountingProductEvent(Object source, long productId, int discount) {
 		super(source);
-		this.productId = productId;
-		this.discount = discount;
+		this.productDiscount = new ProductDiscount(productId, discount);
 	}
 }

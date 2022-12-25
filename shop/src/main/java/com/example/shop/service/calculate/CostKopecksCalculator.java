@@ -3,7 +3,7 @@ package com.example.shop.service.calculate;
 import com.example.shop.model.SalePair;
 import com.example.shop.model.entity.Client;
 import com.example.shop.model.entity.Product;
-import com.example.shop.model.entity.ProductDiscount;
+import com.example.shop.model.ProductDiscount;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.service.errors.ProductNotFoundException;
 import com.example.shop.service.schedule.NewDiscountingProductEvent;
@@ -16,32 +16,29 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class CostKopecksCalculator implements KopecksCalculator {
+	private ProductDiscount currentDiscounting;
 	private final JdbcTemplate jdbcTemplate;
 	private final ProductRepository productRepository;
-	private long currentDiscountingProductId;
-	private long currentDiscountingProductValue;
 
 	@PostConstruct
 	public void init() {
 		jdbcTemplate.query("select * from product_discount limit 1", (RowMapper<ProductDiscount>) (rs, rowNum) -> {
-			currentDiscountingProductId = rs.getLong("id");
-			currentDiscountingProductValue = rs.getLong("product_discount");
+			currentDiscounting = new ProductDiscount(rs.getLong(1), rs.getInt(2));
 			return null;
 		});
 	}
 
 	@EventListener
 	public void onNewDiscountingProductEvent(NewDiscountingProductEvent event) {
-		currentDiscountingProductId = event.getProductId();
-		currentDiscountingProductValue = event.getDiscount();
+		currentDiscounting = event.getProductDiscount();
+		System.out.println(currentDiscounting);
 	}
 
 	@Override
@@ -61,8 +58,8 @@ public class CostKopecksCalculator implements KopecksCalculator {
 		long id = pair.getProductId();
 		Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
 		int finalDiscount = clientDiscount;
-		if (product.getId() == currentDiscountingProductId) {
-			finalDiscount += currentDiscountingProductValue;
+		if (Objects.equals(product.getId(), currentDiscounting.getProductId())) {
+			finalDiscount += currentDiscounting.getPercentDiscount();
 		}
 		finalDiscount = Math.min(finalDiscount, 18);
 

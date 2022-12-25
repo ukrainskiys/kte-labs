@@ -12,15 +12,13 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class SetIndividualDiscountsRequest {
-	@NotNull(message = "enter 'id' long")
+	@NotNull
 	private Long id;
 	@JsonProperty("discount_first")
-	@NotNull
 	@Min(1)
 	@Max(100)
 	private Integer discountFirst;
 	@JsonProperty("discount_second")
-	@NotNull
 	@Min(1)
 	@Max(100)
 	private Integer discountSecond;

@@ -19,7 +19,7 @@ public class Product {
 	private String name;
 	private BigDecimal price;
 	private String description;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_id")
 	private List<Rating> ratings;
 }

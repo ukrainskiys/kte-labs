@@ -4,11 +4,13 @@ import com.example.shop.model.Position;
 import com.example.shop.model.SalePair;
 import com.example.shop.model.entity.Client;
 import com.example.shop.model.entity.SaleFact;
+import com.example.shop.model.entity.SaleFactPosition;
 import com.example.shop.repository.SaleFactRepository;
 import com.example.shop.controller.dto.response.SaleRegistrationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 import com.example.shop.service.errors.IncorrectFinalPriceException;
 import com.example.shop.service.schedule.CheckGenerator;
+import com.example.shop.util.MoneyUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,17 +25,19 @@ public class SaleFactServiceImpl implements SaleFactService {
 
 	@Override
 	public void keepFinalCost(Client client, List<SalePair> sales, List<CalculationResult> calculations) {
-		List<Position> positions = new ArrayList<>();
+		List<SaleFactPosition> positions = new ArrayList<>();
 		for (int i = 0; i < calculations.size(); i++) {
 			CalculationResult calc = calculations.get(i);
 			SalePair pair = sales.get(i);
-			positions.add(Position.builder()
-				.finalPrice(calc.getSumKopecks())
-				.finalDiscount(calc.getDiscount())
-				.price(calc.getSumKopecks() + calc.getDiscountSumKopecks())
-				.count(pair.getCount())
-				.productId(pair.getProductId())
-				.build());
+
+			SaleFactPosition position = new SaleFactPosition();
+			position.setFinalPrice(MoneyUtils.fromKopecks(calc.getSumKopecks()));
+			position.setFinalDiscountPercent(calc.getDiscount());
+			position.setPrice(MoneyUtils.fromKopecks(calc.getSumKopecks() + calc.getDiscountSumKopecks()));
+			position.setCount(pair.getCount());
+			position.setProductId(pair.getProductId());
+
+			positions.add(position);
 		}
 
 		SaleFact fact = new SaleFact();
