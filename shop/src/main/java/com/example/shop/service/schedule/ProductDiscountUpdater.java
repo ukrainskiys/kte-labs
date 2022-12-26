@@ -37,13 +37,18 @@ public class ProductDiscountUpdater implements Updater {
 		}
 		productId = pageProduct.get().toList().get(0).getId();
 		int discount = 5 + random.nextInt(6);
-		String query = """
-			START TRANSACTION;
-			TRUNCATE TABLE product_discount;
-			INSERT INTO product_discount VALUES (?, ?);
-			COMMIT;
-			""";
-		jdbcTemplate.update(query, discount, productId);
+
+		updateDiscountingProduct(productId, discount);
 		applicationEventPublisher.publishEvent(new NewDiscountingProductEvent(this, productId, discount));
+	}
+
+	private void updateDiscountingProduct(long productId, int discount) {
+		String query = """
+         	START TRANSACTION;
+         	TRUNCATE TABLE product_discount;
+         	INSERT INTO product_discount VALUES (?,?);
+         	COMMIT;
+         	""";
+		jdbcTemplate.update(query, productId, discount);
 	}
 }

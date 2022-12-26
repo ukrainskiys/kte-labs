@@ -1,6 +1,7 @@
 package com.example.shop.controller.rest;
 
 import com.example.shop.controller.dto.request.ProductEvaluationRequest;
+import com.example.shop.controller.dto.request.ProductInformationRequest;
 import com.example.shop.controller.dto.response.GetAllProductsResponse;
 import com.example.shop.controller.dto.response.ProductInformationResponse;
 import com.example.shop.service.ProductService;
@@ -19,12 +20,9 @@ public class ProductController {
 		return new GetAllProductsResponse(productService.getAllProducts());
 	}
 
-	@GetMapping("/info")
-	public ProductInformationResponse getProductInformation(
-		@RequestParam(value = "product_id") Long productId,
-		@RequestParam(value = "client_id") Long clientId
-	) {
-		return productService.getProductInfo(clientId, productId);
+	@PostMapping("/info")
+	public ProductInformationResponse getProductInformation(@Valid @RequestBody ProductInformationRequest request) {
+		return productService.getProductInfo(request.getClientId(), request.getProductId());
 	}
 
 	@PostMapping("/evaluation")

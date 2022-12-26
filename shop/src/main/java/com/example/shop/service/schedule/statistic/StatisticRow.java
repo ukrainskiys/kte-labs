@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 class StatisticRow {
-	private long clientId;
-	private long productId;
+	private Long clientId;
+	private Long productId;
 	private LocalDateTime date;
 	private String check;
 	private BigDecimal finalPrice;

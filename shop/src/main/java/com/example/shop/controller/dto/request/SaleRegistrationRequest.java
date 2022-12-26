@@ -2,7 +2,6 @@ package com.example.shop.controller.dto.request;
 
 import com.example.shop.model.SalePair;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class SaleRegistrationRequest {
-	@NotBlank
+	@NotNull
 	private List<SalePair> products;
 	@JsonProperty("final_price_kopecks")
 	@NotNull

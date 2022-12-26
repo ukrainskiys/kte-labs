@@ -15,4 +15,8 @@ public final class MoneyUtils {
     public static long toKopecks(BigDecimal decimal) {
         return decimal.multiply(DECIMAL_HUNDRED).longValue();
     }
+
+    public static BigDecimal ofPercent(BigDecimal decimal, int percent) {
+        return decimal.divide(DECIMAL_HUNDRED, RoundingMode.HALF_UP).multiply(BigDecimal.valueOf(percent));
+    }
 }

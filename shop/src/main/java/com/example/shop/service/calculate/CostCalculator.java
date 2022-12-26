@@ -7,6 +7,8 @@ import com.example.shop.model.ProductDiscount;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.service.errors.ProductNotFoundException;
 import com.example.shop.service.schedule.NewDiscountingProductEvent;
+import com.example.shop.util.IntUtils;
+import com.example.shop.util.MoneyUtils;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
@@ -15,14 +17,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
-public class CostKopecksCalculator implements KopecksCalculator {
+public class CostCalculator implements Calculator {
 	private ProductDiscount currentDiscounting;
 	private final JdbcTemplate jdbcTemplate;
 	private final ProductRepository productRepository;
@@ -38,39 +39,32 @@ public class CostKopecksCalculator implements KopecksCalculator {
 	@EventListener
 	public void onNewDiscountingProductEvent(NewDiscountingProductEvent event) {
 		currentDiscounting = event.getProductDiscount();
-		System.out.println(currentDiscounting);
 	}
 
 	@Override
 	public List<CalculationResult> calculate(Client client, List<SalePair> sales) {
 		List<CalculationResult> calculation = new ArrayList<>();
 		for (SalePair pair : sales) {
-			int clientDiscount = client.getIndividualDiscountFirst();
-			if (pair.getCount() >= 5 && client.getIndividualDiscountSecond() != 0) {
-				clientDiscount = client.getIndividualDiscountSecond();
+			int clientDiscount = IntUtils.intOrZero(client.getIndividualDiscountFirst());
+			int discountSecond = IntUtils.intOrZero(client.getIndividualDiscountSecond());
+			if (pair.getCount() >= 5 && discountSecond != 0) {
+				clientDiscount = discountSecond;
 			}
-			calculation.add(calculateWithClientDiscount(clientDiscount, pair));
+			calculation.add(calculate(clientDiscount, pair));
 		}
 		return calculation;
 	}
 
-	private CalculationResult calculateWithClientDiscount(int clientDiscount, SalePair pair) {
+	private CalculationResult calculate(int clientDiscount, SalePair pair) {
 		long id = pair.getProductId();
 		Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
-		int finalDiscount = clientDiscount;
 		if (Objects.equals(product.getId(), currentDiscounting.getProductId())) {
-			finalDiscount += currentDiscounting.getPercentDiscount();
+			clientDiscount += currentDiscounting.getPercentDiscount();
 		}
-		finalDiscount = Math.min(finalDiscount, 18);
+		clientDiscount = Math.min(clientDiscount, 18);
 
 		BigDecimal sum = product.getPrice().multiply(BigDecimal.valueOf(pair.getCount()));
-		BigDecimal sumWithDiscount = sum.multiply(
-			BigDecimal.valueOf(100 - finalDiscount).divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP)
-		);
-		return new CalculationResult(finalDiscount, toKopecks(sumWithDiscount), toKopecks(sum.subtract(sumWithDiscount)));
-	}
-
-	private long toKopecks(BigDecimal decimal) {
-		return decimal.multiply(BigDecimal.valueOf(100)).longValue();
+		BigDecimal sumWithDiscount = MoneyUtils.ofPercent(sum, 100 - clientDiscount);
+		return new CalculationResult(clientDiscount, sum, sumWithDiscount);
 	}
 }

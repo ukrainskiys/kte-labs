@@ -4,9 +4,7 @@ import com.example.shop.model.entity.Statistic;
 import com.example.shop.repository.StatisticsRepository;
 import com.example.shop.controller.dto.request.GetStatisticsRequest;
 import com.example.shop.controller.dto.response.GetStatisticsResponse;
-import com.example.shop.service.errors.ClientNotFoundException;
 import com.example.shop.service.errors.IncorrectGetStatisticResponseException;
-import com.example.shop.service.errors.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,23 +26,21 @@ public class StatisticServiceImpl implements StatisticService {
 
 	@Override
 	public GetStatisticsResponse getClientStatistic(long clientId) {
-		Statistic statistic = statisticsRepository.findByClientId(clientId)
-			.orElseThrow(() -> new ClientNotFoundException(clientId));
+		Statistic statistic = statisticsRepository.findByClientId(clientId).orElseGet(Statistic::new);
 		return buildStatisticResponse(statistic);
 	}
 
 	@Override
 	public GetStatisticsResponse getProductStatistic(long productId) {
-		Statistic statistic = statisticsRepository.findByProductId(productId)
-			.orElseThrow(() -> new ProductNotFoundException(productId));
+		Statistic statistic = statisticsRepository.findByProductId(productId).orElseGet(Statistic::new);
 		return buildStatisticResponse(statistic);
 	}
 
 	private GetStatisticsResponse buildStatisticResponse(Statistic statistic) {
 		return GetStatisticsResponse.builder()
 			.countChecks(statistic.getCountChecks())
-			.totalCost(statistic.getTotalCostsKopecks())
-			.discountAmount(statistic.getTotalDiscountsKopecks())
+			.totalCost(statistic.getTotalCosts())
+			.discountAmount(statistic.getTotalDiscounts())
 			.build();
 	}
 }

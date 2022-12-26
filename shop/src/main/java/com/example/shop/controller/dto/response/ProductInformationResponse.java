@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Builder
 public class ProductInformationResponse {
-	private String description;
+	private String name;
 	@JsonProperty("average_rating")
 	private BigDecimal averageRating;
 	private List<RatingPair> ratings;

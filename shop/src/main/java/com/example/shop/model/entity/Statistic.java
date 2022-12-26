@@ -1,11 +1,11 @@
 package com.example.shop.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -18,10 +18,10 @@ public class Statistic {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Long id;
+	private LocalDateTime lastUpdate;
 	private Long clientId;
 	private Long productId;
-	private LocalDateTime dateUpdate;
 	private Integer countChecks;
-	private Long totalCostsKopecks;
-	private Long totalDiscountsKopecks;
+	private BigDecimal totalCosts;
+	private BigDecimal totalDiscounts;
 }

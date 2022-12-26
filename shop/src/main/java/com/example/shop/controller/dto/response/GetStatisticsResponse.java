@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.math.BigDecimal;
+
 @Getter
 @Builder
 public class GetStatisticsResponse {
 	@JsonProperty("count_checks")
-	private int countChecks;
+	private Integer countChecks;
 	@JsonProperty("total_cost")
-	private long totalCost;
+	private BigDecimal totalCost;
 	@JsonProperty("discount_amount")
-	private long discountAmount;
+	private BigDecimal discountAmount;
 }

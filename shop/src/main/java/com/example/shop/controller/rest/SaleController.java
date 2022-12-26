@@ -26,12 +26,12 @@ public class SaleController {
         return productService.calculateFinalPrice(request.getClientId(), request.getProducts());
     }
 
-    @PutMapping("/registration")
+    @PostMapping("/registration")
     public SaleRegistrationResponse registration(@Valid @RequestBody SaleRegistrationRequest request) {
         return saleFactService.saleRegistration(request.getProducts(), request.getFinalPriceKopecks());
     }
 
-    @PutMapping("/statistic")
+    @PostMapping("/statistic")
     public GetStatisticsResponse statistic(@Valid @RequestBody GetStatisticsRequest request) {
         return statisticService.getStatistic(request);
     }

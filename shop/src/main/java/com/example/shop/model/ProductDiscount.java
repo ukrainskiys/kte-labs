@@ -8,4 +8,12 @@ import lombok.Getter;
 public class ProductDiscount {
 	private Long productId;
 	private Integer percentDiscount;
+
+	@Override
+	public String toString() {
+		return "ProductDiscount{" +
+				"productId=" + productId +
+				", percentDiscount=" + percentDiscount +
+				'}';
+	}
 }
