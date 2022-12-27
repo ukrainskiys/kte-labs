@@ -1,5 +1,6 @@
 package com.example.shop.service;
 
+import com.example.shop.model.ClientDTO;
 import com.example.shop.model.entity.Client;
 import com.example.shop.repository.ClientRepository;
 import com.example.shop.service.errors.ClientNotFoundException;
@@ -14,8 +15,8 @@ public class ClientServiceImpl implements ClientService {
 	private final ClientRepository clientRepository;
 
 	@Override
-	public List<Client> getAllClients() {
-		return clientRepository.findAll();
+	public List<ClientDTO> getAllClients() {
+		return clientRepository.findAll().stream().map(ClientDTO::new).toList();
 	}
 
 	@Override

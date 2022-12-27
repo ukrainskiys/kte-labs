@@ -1,13 +1,15 @@
 package com.example.shop.model;
 
 import com.example.shop.model.entity.Product;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Getter
-@AllArgsConstructor
+@Setter
+@NoArgsConstructor
 public class ProductDTO {
 	private Long id;
 	private String name;

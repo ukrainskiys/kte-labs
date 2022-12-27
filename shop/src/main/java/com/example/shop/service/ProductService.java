@@ -2,8 +2,8 @@ package com.example.shop.service;
 
 import com.example.shop.model.ProductDTO;
 import com.example.shop.model.SalePair;
-import com.example.shop.controller.dto.response.CalculateFinalPriceResponse;
-import com.example.shop.controller.dto.response.ProductInformationResponse;
+import com.example.shop.api.dto.response.CalculateFinalPriceResponse;
+import com.example.shop.api.dto.response.ProductInformationResponse;
 
 import java.util.List;
 

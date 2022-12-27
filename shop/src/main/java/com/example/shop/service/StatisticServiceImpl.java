@@ -2,8 +2,8 @@ package com.example.shop.service;
 
 import com.example.shop.model.entity.Statistic;
 import com.example.shop.repository.StatisticsRepository;
-import com.example.shop.controller.dto.request.GetStatisticsRequest;
-import com.example.shop.controller.dto.response.GetStatisticsResponse;
+import com.example.shop.api.dto.request.GetStatisticsRequest;
+import com.example.shop.api.dto.response.GetStatisticsResponse;
 import com.example.shop.service.errors.IncorrectGetStatisticResponseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,10 +37,6 @@ public class StatisticServiceImpl implements StatisticService {
 	}
 
 	private GetStatisticsResponse buildStatisticResponse(Statistic statistic) {
-		return GetStatisticsResponse.builder()
-			.countChecks(statistic.getCountChecks())
-			.totalCost(statistic.getTotalCosts())
-			.discountAmount(statistic.getTotalDiscounts())
-			.build();
+		return new GetStatisticsResponse(statistic.getCountChecks(), statistic.getTotalCosts(), statistic.getTotalDiscounts());
 	}
 }

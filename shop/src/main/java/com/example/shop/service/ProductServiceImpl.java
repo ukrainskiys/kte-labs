@@ -7,8 +7,8 @@ import com.example.shop.model.entity.Product;
 import com.example.shop.model.entity.Rating;
 import com.example.shop.model.SalePair;
 import com.example.shop.repository.ProductRepository;
-import com.example.shop.controller.dto.response.CalculateFinalPriceResponse;
-import com.example.shop.controller.dto.response.ProductInformationResponse;
+import com.example.shop.api.dto.response.CalculateFinalPriceResponse;
+import com.example.shop.api.dto.response.ProductInformationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 import com.example.shop.service.calculate.Calculator;
 import com.example.shop.service.errors.ProductNotFoundException;
@@ -40,9 +40,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductInformationResponse getProductInfo(long clientId, long productId) {
 		Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(productId));
-		List<Rating> ratings = product.getRatings();
+		List<Rating> ratings = ratingService.getAllByProductId(productId);
 
-		List<RatingPair> ratingPairs = product.getRatings().stream()
+		List<RatingPair> ratingPairs = ratings.stream()
 			.collect(Collectors.groupingBy(Rating::getRating, Collectors.counting()))
 			.entrySet().stream()
 			.sorted(Map.Entry.comparingByKey())
@@ -59,12 +59,7 @@ public class ProductServiceImpl implements ProductService {
 
 		Integer currentRating = ratingService.getRatingByClientIdAndProductId(clientId, productId);
 
-		return ProductInformationResponse.builder()
-			.name(product.getName())
-			.currentClientRating(currentRating)
-			.averageRating(averageRating)
-			.ratings(ratingPairs)
-			.build();
+		return new ProductInformationResponse(product.getName(), averageRating, ratingPairs, currentRating);
 	}
 
 	@Override
@@ -73,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 		List<CalculationResult> calculates = calculator.calculate(client, sales);
 		saleFactService.keepFinalCost(client, sales, calculates);
 		long sum = calculates.stream().map(CalculationResult::getSumWithDiscount).mapToLong(MoneyUtils::toKopecks).sum();
-		return CalculateFinalPriceResponse.builder().priceKopecks(sum).build();
+		return new CalculateFinalPriceResponse(sum);
 	}
 
 	@Override

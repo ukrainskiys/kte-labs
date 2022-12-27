@@ -21,7 +21,7 @@ public class SaleFact {
 	private Client client;
 	private LocalDateTime saleDate;
 	private String checkNumber;
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "sale_fact_id")
 	private List<SaleFactPosition> positions;
 }

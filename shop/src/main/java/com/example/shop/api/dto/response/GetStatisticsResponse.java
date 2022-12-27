@@ -1,13 +1,16 @@
-package com.example.shop.controller.dto.response;
+package com.example.shop.api.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@XmlRootElement
 public class GetStatisticsResponse {
 	@JsonProperty("count_checks")
 	private Integer countChecks;

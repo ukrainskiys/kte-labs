@@ -6,7 +6,7 @@ import com.example.shop.model.entity.SaleFact;
 import com.example.shop.model.entity.SaleFactPosition;
 import com.example.shop.repository.SaleFactPositionRepository;
 import com.example.shop.repository.SaleFactRepository;
-import com.example.shop.controller.dto.response.SaleRegistrationResponse;
+import com.example.shop.api.dto.response.SaleRegistrationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 import com.example.shop.service.calculate.Calculator;
 import com.example.shop.service.errors.IncorrectFinalPriceException;
@@ -49,7 +49,7 @@ public class SaleFactServiceImpl implements SaleFactService {
 			position.setSaleFact(fact);
 			positions.add(position);
 		}
-		saleFactPositionRepository.saveAll(positions);
+		saleFactPositionRepository.saveAllAndFlush(positions);
 	}
 
 	@Override

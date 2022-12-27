@@ -1,15 +1,18 @@
-package com.example.shop.controller.dto.response;
+package com.example.shop.api.dto.response;
 
 import com.example.shop.model.RatingPair;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Builder;
-import lombok.Getter;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@XmlRootElement
 public class ProductInformationResponse {
 	private String name;
 	@JsonProperty("average_rating")

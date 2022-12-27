@@ -17,3 +17,5 @@ spring:
 server:
   error:
     include-message: always
+cxf:
+  path: /soap

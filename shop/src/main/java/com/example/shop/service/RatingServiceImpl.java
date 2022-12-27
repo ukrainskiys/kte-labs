@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RatingServiceImpl implements RatingService {
@@ -20,6 +22,11 @@ public class RatingServiceImpl implements RatingService {
 	@Override
 	public Integer getRatingByClientIdAndProductId(long clientId, long productId) {
 		return ratingRepository.findByClientIdAndProductId(clientId, productId).map(Rating::getRating).orElse(null);
+	}
+
+	@Override
+	public List<Rating> getAllByProductId(long productId) {
+		return ratingRepository.findAllByProductId(productId);
 	}
 
 	@Override
