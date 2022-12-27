@@ -28,6 +28,14 @@ public class ProductSoapService implements ProductSoapApi {
 
     @Override
     public void evaluation(ProductEvaluationRequest request) {
+        validateProductEvaluationRequest(request);
         productService.productEvaluation(request.getClientId(), request.getProductId(), request.getRating());
+    }
+
+    private void validateProductEvaluationRequest(ProductEvaluationRequest request) {
+        Integer rating = request.getRating();
+        if (rating != null && (rating < 1 || rating > 5)) {
+            throw new RuntimeException("rating should be 1-5 or null");
+        }
     }
 }

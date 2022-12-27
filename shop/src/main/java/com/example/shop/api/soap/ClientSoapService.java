@@ -21,6 +21,15 @@ public class ClientSoapService implements ClientSoapApi {
 
     @Override
     public void discounts(SetIndividualDiscountsRequest request) {
+        validateSetIndividualDiscountsRequest(request);
         clientService.updateClientDiscounts(request.getId(), request.getDiscountFirst(), request.getDiscountSecond());
+    }
+
+    private void validateSetIndividualDiscountsRequest(SetIndividualDiscountsRequest request) {
+        Integer first = request.getDiscountFirst();
+        Integer second = request.getDiscountSecond();
+        if ((first != null && (first < 0 || first > 100)) || (second != null && (second < 0 || second > 100))) {
+            throw new RuntimeException("discount should be 0-100");
+        }
     }
 }
