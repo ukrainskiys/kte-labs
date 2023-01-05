@@ -9,7 +9,7 @@ import com.example.shop.service.errors.ProductNotFoundException;
 import com.example.shop.service.schedule.NewDiscountingProductEvent;
 import com.example.shop.util.IntUtils;
 import com.example.shop.util.MoneyUtils;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;

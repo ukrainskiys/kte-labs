@@ -1,10 +1,10 @@
-package com.example.shop.api.rest;
+package com.example.shop.controllers.rest;
 
-import com.example.shop.api.ClientApi;
-import com.example.shop.api.dto.request.SetIndividualDiscountsRequest;
-import com.example.shop.api.dto.response.GetAllClientsResponse;
+import com.example.shop.controllers.ClientApi;
+import com.example.shop.controllers.request.SetIndividualDiscountsRequest;
+import com.example.shop.controllers.response.GetAllClientsResponse;
 import com.example.shop.service.ClientService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

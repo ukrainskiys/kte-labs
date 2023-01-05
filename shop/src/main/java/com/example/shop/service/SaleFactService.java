@@ -2,7 +2,7 @@ package com.example.shop.service;
 
 import com.example.shop.domain.ProductCountPair;
 import com.example.shop.domain.model.Client;
-import com.example.shop.api.dto.response.SaleRegistrationResponse;
+import com.example.shop.controllers.response.SaleRegistrationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 
 import java.util.List;

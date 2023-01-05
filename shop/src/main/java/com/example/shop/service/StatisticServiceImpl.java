@@ -2,8 +2,8 @@ package com.example.shop.service;
 
 import com.example.shop.domain.model.Statistic;
 import com.example.shop.repository.StatisticsRepository;
-import com.example.shop.api.dto.request.GetStatisticsRequest;
-import com.example.shop.api.dto.response.GetStatisticsResponse;
+import com.example.shop.controllers.request.GetStatisticsRequest;
+import com.example.shop.controllers.response.GetStatisticsResponse;
 import com.example.shop.service.errors.IncorrectGetStatisticResponseException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

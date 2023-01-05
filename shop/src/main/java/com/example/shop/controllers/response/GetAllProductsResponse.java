@@ -1,7 +1,7 @@
-package com.example.shop.api.dto.response;
+package com.example.shop.controllers.response;
 
 import com.example.shop.domain.dto.ProductDTO;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.example.shop.service.schedule;
 
 import com.example.shop.repository.SaleFactRepository;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

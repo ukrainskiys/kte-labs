@@ -6,7 +6,7 @@ import com.example.shop.domain.model.SaleFact;
 import com.example.shop.domain.model.SaleFactPosition;
 import com.example.shop.repository.SaleFactPositionRepository;
 import com.example.shop.repository.SaleFactRepository;
-import com.example.shop.api.dto.response.SaleRegistrationResponse;
+import com.example.shop.controllers.response.SaleRegistrationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 import com.example.shop.service.calculate.Calculator;
 import com.example.shop.service.errors.IncorrectFinalPriceException;

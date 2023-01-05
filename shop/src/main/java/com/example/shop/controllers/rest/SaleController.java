@@ -1,16 +1,16 @@
-package com.example.shop.api.rest;
+package com.example.shop.controllers.rest;
 
-import com.example.shop.api.SaleApi;
-import com.example.shop.api.dto.request.CalculateFinalPriceRequest;
-import com.example.shop.api.dto.request.GetStatisticsRequest;
-import com.example.shop.api.dto.request.SaleRegistrationRequest;
-import com.example.shop.api.dto.response.CalculateFinalPriceResponse;
-import com.example.shop.api.dto.response.GetStatisticsResponse;
-import com.example.shop.api.dto.response.SaleRegistrationResponse;
+import com.example.shop.controllers.SaleApi;
+import com.example.shop.controllers.request.CalculateFinalPriceRequest;
+import com.example.shop.controllers.request.GetStatisticsRequest;
+import com.example.shop.controllers.request.SaleRegistrationRequest;
+import com.example.shop.controllers.response.CalculateFinalPriceResponse;
+import com.example.shop.controllers.response.GetStatisticsResponse;
+import com.example.shop.controllers.response.SaleRegistrationResponse;
 import com.example.shop.service.ProductService;
 import com.example.shop.service.SaleFactService;
 import com.example.shop.service.StatisticService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

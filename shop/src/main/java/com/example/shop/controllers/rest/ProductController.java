@@ -1,12 +1,12 @@
-package com.example.shop.api.rest;
+package com.example.shop.controllers.rest;
 
-import com.example.shop.api.ProductApi;
-import com.example.shop.api.dto.request.ProductEvaluationRequest;
-import com.example.shop.api.dto.request.ProductInformationRequest;
-import com.example.shop.api.dto.response.GetAllProductsResponse;
-import com.example.shop.api.dto.response.ProductInformationResponse;
+import com.example.shop.controllers.ProductApi;
+import com.example.shop.controllers.request.ProductEvaluationRequest;
+import com.example.shop.controllers.request.ProductInformationRequest;
+import com.example.shop.controllers.response.GetAllProductsResponse;
+import com.example.shop.controllers.response.ProductInformationResponse;
 import com.example.shop.service.ProductService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
