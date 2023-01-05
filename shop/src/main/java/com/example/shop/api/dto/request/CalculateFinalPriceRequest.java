@@ -1,6 +1,6 @@
 package com.example.shop.api.dto.request;
 
-import com.example.shop.model.SalePair;
+import com.example.shop.domain.ProductCountPair;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -22,5 +22,5 @@ public class CalculateFinalPriceRequest {
 	@NotNull
 	private Long clientId;
 	@NotNull
-	private List<SalePair> products = new ArrayList<>();
+	private List<ProductCountPair> products = new ArrayList<>();
 }

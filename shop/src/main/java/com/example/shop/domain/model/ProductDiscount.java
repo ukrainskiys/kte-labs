@@ -1,4 +1,4 @@
-package com.example.shop.model;
+package com.example.shop.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,9 +1,9 @@
 package com.example.shop.service;
 
-import com.example.shop.model.SalePair;
-import com.example.shop.model.entity.Client;
-import com.example.shop.model.entity.SaleFact;
-import com.example.shop.model.entity.SaleFactPosition;
+import com.example.shop.domain.ProductCountPair;
+import com.example.shop.domain.model.Client;
+import com.example.shop.domain.model.SaleFact;
+import com.example.shop.domain.model.SaleFactPosition;
 import com.example.shop.repository.SaleFactPositionRepository;
 import com.example.shop.repository.SaleFactRepository;
 import com.example.shop.api.dto.response.SaleRegistrationResponse;
@@ -30,7 +30,7 @@ public class SaleFactServiceImpl implements SaleFactService {
 	private final Calculator calculator;
 
 	@Override
-	public void keepFinalCost(Client client, List<SalePair> sales, List<CalculationResult> calculations) {
+	public void keepFinalCost(Client client, List<ProductCountPair> sales, List<CalculationResult> calculations) {
 		SaleFact fact = new SaleFact();
 		fact.setClient(client);
 		saleFactRepository.saveAndFlush(fact);
@@ -38,7 +38,7 @@ public class SaleFactServiceImpl implements SaleFactService {
 		List<SaleFactPosition> positions = new ArrayList<>();
 		for (int i = 0; i < calculations.size(); i++) {
 			CalculationResult calc = calculations.get(i);
-			SalePair pair = sales.get(i);
+			ProductCountPair pair = sales.get(i);
 
 			SaleFactPosition position = new SaleFactPosition();
 			position.setPrice(calc.getSum());
@@ -53,7 +53,7 @@ public class SaleFactServiceImpl implements SaleFactService {
 	}
 
 	@Override
-	public SaleRegistrationResponse saleRegistration(List<SalePair> products, long finalPriceKopecks) {
+	public SaleRegistrationResponse saleRegistration(List<ProductCountPair> products, long finalPriceKopecks) {
 		String query = """
         	SELECT sf.id AS id, sum(sfp.final_price)
       		FROM sale_fact_positions sfp
@@ -70,8 +70,8 @@ public class SaleFactServiceImpl implements SaleFactService {
 
 		List<SaleFact> allById = saleFactRepository.findAllById(listIds);
 		for (SaleFact saleFact : allById) {
-			List<SalePair> saleFactProductList = saleFact.getPositions().stream()
-					.map(pos -> new SalePair(pos.getProductId(), pos.getCount()))
+			List<ProductCountPair> saleFactProductList = saleFact.getPositions().stream()
+					.map(pos -> new ProductCountPair(pos.getProductId(), pos.getCount()))
 					.toList();
 
 			if (saleFactProductList.equals(products)) {

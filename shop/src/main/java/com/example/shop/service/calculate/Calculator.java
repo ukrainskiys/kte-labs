@@ -1,10 +1,10 @@
 package com.example.shop.service.calculate;
 
-import com.example.shop.model.SalePair;
-import com.example.shop.model.entity.Client;
+import com.example.shop.domain.ProductCountPair;
+import com.example.shop.domain.model.Client;
 
 import java.util.List;
 
 public interface Calculator {
-	List<CalculationResult> calculate(Client client, List<SalePair> sales);
+	List<CalculationResult> calculate(Client client, List<ProductCountPair> sales);
 }

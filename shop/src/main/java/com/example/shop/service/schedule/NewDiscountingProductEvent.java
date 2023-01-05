@@ -1,6 +1,6 @@
 package com.example.shop.service.schedule;
 
-import com.example.shop.model.ProductDiscount;
+import com.example.shop.domain.model.ProductDiscount;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

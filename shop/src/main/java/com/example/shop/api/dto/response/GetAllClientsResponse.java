@@ -1,6 +1,6 @@
 package com.example.shop.api.dto.response;
 
-import com.example.shop.model.ClientDTO;
+import com.example.shop.domain.dto.ClientDTO;
 import jakarta.xml.bind.annotation.*;
 import lombok.*;
 

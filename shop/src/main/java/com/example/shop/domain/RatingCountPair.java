@@ -1,4 +1,4 @@
-package com.example.shop.model;
+package com.example.shop.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RatingPair {
+public class RatingCountPair {
 	private int rating;
 	private long count;
 }

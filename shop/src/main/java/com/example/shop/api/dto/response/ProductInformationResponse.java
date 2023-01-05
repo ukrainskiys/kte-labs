@@ -1,6 +1,6 @@
 package com.example.shop.api.dto.response;
 
-import com.example.shop.model.RatingPair;
+import com.example.shop.domain.RatingCountPair;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import lombok.*;
@@ -17,7 +17,7 @@ public class ProductInformationResponse {
 	private String name;
 	@JsonProperty("average_rating")
 	private BigDecimal averageRating;
-	private List<RatingPair> ratings;
+	private List<RatingCountPair> ratings;
 	@JsonProperty("current_client_rating")
 	private Integer currentClientRating;
 }

@@ -1,6 +1,5 @@
-package com.example.shop.model;
+package com.example.shop.domain.dto;
 
-import com.example.shop.model.entity.Client;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +15,4 @@ public class ClientDTO {
     private Integer individualDiscountFirst;
     @JsonProperty("individual_discount_second")
     private Integer individualDiscountSecond;
-
-    public ClientDTO(Client client) {
-        this.id = client.getId();
-        this.name = client.getName();
-        this.individualDiscountFirst = client.getIndividualDiscountFirst();
-        this.individualDiscountSecond = client.getIndividualDiscountSecond();
-    }
 }

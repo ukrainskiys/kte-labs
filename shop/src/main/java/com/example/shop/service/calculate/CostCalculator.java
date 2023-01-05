@@ -1,9 +1,9 @@
 package com.example.shop.service.calculate;
 
-import com.example.shop.model.SalePair;
-import com.example.shop.model.entity.Client;
-import com.example.shop.model.entity.Product;
-import com.example.shop.model.ProductDiscount;
+import com.example.shop.domain.ProductCountPair;
+import com.example.shop.domain.model.Client;
+import com.example.shop.domain.model.Product;
+import com.example.shop.domain.model.ProductDiscount;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.service.errors.ProductNotFoundException;
 import com.example.shop.service.schedule.NewDiscountingProductEvent;
@@ -42,9 +42,9 @@ public class CostCalculator implements Calculator {
 	}
 
 	@Override
-	public List<CalculationResult> calculate(Client client, List<SalePair> sales) {
+	public List<CalculationResult> calculate(Client client, List<ProductCountPair> sales) {
 		List<CalculationResult> calculation = new ArrayList<>();
-		for (SalePair pair : sales) {
+		for (ProductCountPair pair : sales) {
 			int clientDiscount = IntUtils.intOrZero(client.getIndividualDiscountFirst());
 			int discountSecond = IntUtils.intOrZero(client.getIndividualDiscountSecond());
 			if (pair.getCount() >= 5 && discountSecond != 0) {
@@ -55,7 +55,7 @@ public class CostCalculator implements Calculator {
 		return calculation;
 	}
 
-	private CalculationResult calculate(int clientDiscount, SalePair pair) {
+	private CalculationResult calculate(int clientDiscount, ProductCountPair pair) {
 		long id = pair.getProductId();
 		Product product = productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
 		if (Objects.equals(product.getId(), currentDiscounting.getProductId())) {

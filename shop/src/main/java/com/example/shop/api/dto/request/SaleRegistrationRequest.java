@@ -1,6 +1,6 @@
 package com.example.shop.api.dto.request;
 
-import com.example.shop.model.SalePair;
+import com.example.shop.domain.ProductCountPair;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.xml.bind.annotation.XmlRootElement;
@@ -18,7 +18,7 @@ import java.util.List;
 @XmlRootElement
 public class SaleRegistrationRequest {
 	@NotNull
-	private List<SalePair> products;
+	private List<ProductCountPair> products;
 	@JsonProperty("final_price_kopecks")
 	@NotNull
 	private Long finalPriceKopecks;

@@ -1,6 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.model.entity.Statistic;
+import com.example.shop.domain.model.Statistic;
 import com.example.shop.repository.StatisticsRepository;
 import com.example.shop.api.dto.request.GetStatisticsRequest;
 import com.example.shop.api.dto.response.GetStatisticsResponse;

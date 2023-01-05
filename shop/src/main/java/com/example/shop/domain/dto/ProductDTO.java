@@ -1,6 +1,5 @@
-package com.example.shop.model;
+package com.example.shop.domain.dto;
 
-import com.example.shop.model.entity.Product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,10 +13,4 @@ public class ProductDTO {
 	private Long id;
 	private String name;
 	private BigDecimal price;
-
-	public ProductDTO(Product product) {
-		this.id = product.getId();
-		this.name = product.getName();
-		this.price = product.getPrice();
-	}
 }

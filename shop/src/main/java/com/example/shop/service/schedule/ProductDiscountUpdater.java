@@ -1,6 +1,6 @@
 package com.example.shop.service.schedule;
 
-import com.example.shop.model.entity.Product;
+import com.example.shop.domain.model.Product;
 import com.example.shop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;

@@ -1,6 +1,6 @@
 package com.example.shop.service;
 
-import com.example.shop.model.entity.Rating;
+import com.example.shop.domain.model.Rating;
 
 import java.util.List;
 

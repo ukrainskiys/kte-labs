@@ -1,11 +1,11 @@
 package com.example.shop.service;
 
-import com.example.shop.model.ProductDTO;
-import com.example.shop.model.RatingPair;
-import com.example.shop.model.entity.Client;
-import com.example.shop.model.entity.Product;
-import com.example.shop.model.entity.Rating;
-import com.example.shop.model.SalePair;
+import com.example.shop.domain.ProductCountPair;
+import com.example.shop.domain.RatingCountPair;
+import com.example.shop.domain.dto.ProductDTO;
+import com.example.shop.domain.model.Client;
+import com.example.shop.domain.model.Product;
+import com.example.shop.domain.model.Rating;
 import com.example.shop.repository.ProductRepository;
 import com.example.shop.api.dto.response.CalculateFinalPriceResponse;
 import com.example.shop.api.dto.response.ProductInformationResponse;
@@ -14,6 +14,7 @@ import com.example.shop.service.calculate.Calculator;
 import com.example.shop.service.errors.ProductNotFoundException;
 import com.example.shop.util.MoneyUtils;
 import lombok.RequiredArgsConstructor;
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,10 +32,11 @@ public class ProductServiceImpl implements ProductService {
 	private final ClientService clientService;
 	private final SaleFactService saleFactService;
 	private final Calculator calculator;
+	private final DozerBeanMapper mapper;
 
 	@Override
 	public List<ProductDTO> getAllProducts() {
-		return productRepository.findAll().stream().map(ProductDTO::new).toList();
+		return productRepository.findAll().stream().map(product -> mapper.map(product, ProductDTO.class)).toList();
 	}
 
 	@Override
@@ -42,11 +44,11 @@ public class ProductServiceImpl implements ProductService {
 		Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(productId));
 		List<Rating> ratings = ratingService.getAllByProductId(productId);
 
-		List<RatingPair> ratingPairs = ratings.stream()
+		List<RatingCountPair> ratingPairs = ratings.stream()
 			.collect(Collectors.groupingBy(Rating::getRating, Collectors.counting()))
 			.entrySet().stream()
 			.sorted(Map.Entry.comparingByKey())
-			.map(entry -> new RatingPair(entry.getKey(), entry.getValue()))
+			.map(entry -> new RatingCountPair(entry.getKey(), entry.getValue()))
 			.toList();
 
 		BigDecimal averageRating = BigDecimal.valueOf(
@@ -63,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public CalculateFinalPriceResponse calculateFinalPrice(long clientId, List<SalePair> sales) {
+	public CalculateFinalPriceResponse calculateFinalPrice(long clientId, List<ProductCountPair> sales) {
 		Client client = clientService.getClientById(clientId);
 		List<CalculationResult> calculates = calculator.calculate(client, sales);
 		saleFactService.keepFinalCost(client, sales, calculates);

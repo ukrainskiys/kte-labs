@@ -1,7 +1,7 @@
 package com.example.shop.service;
 
-import com.example.shop.model.ClientDTO;
-import com.example.shop.model.entity.Client;
+import com.example.shop.domain.dto.ClientDTO;
+import com.example.shop.domain.model.Client;
 
 import java.util.List;
 

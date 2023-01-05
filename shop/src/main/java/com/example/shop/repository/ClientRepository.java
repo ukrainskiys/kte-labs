@@ -1,6 +1,6 @@
 package com.example.shop.repository;
 
-import com.example.shop.model.entity.Client;
+import com.example.shop.domain.model.Client;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,10 +1,11 @@
 package com.example.shop.service;
 
-import com.example.shop.model.ClientDTO;
-import com.example.shop.model.entity.Client;
+import com.example.shop.domain.dto.ClientDTO;
+import com.example.shop.domain.model.Client;
 import com.example.shop.repository.ClientRepository;
 import com.example.shop.service.errors.ClientNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,10 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
 	private final ClientRepository clientRepository;
+	private final DozerBeanMapper mapper;
 
 	@Override
 	public List<ClientDTO> getAllClients() {
-		return clientRepository.findAll().stream().map(ClientDTO::new).toList();
+		return clientRepository.findAll().stream().map(client -> mapper.map(client, ClientDTO.class)).toList();
 	}
 
 	@Override

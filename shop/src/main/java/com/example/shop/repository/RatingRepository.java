@@ -1,6 +1,6 @@
 package com.example.shop.repository;
 
-import com.example.shop.model.entity.Rating;
+import com.example.shop.domain.model.Rating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

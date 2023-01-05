@@ -1,4 +1,4 @@
-package com.example.shop.model;
+package com.example.shop.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
@@ -14,7 +14,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SalePair {
+public class ProductCountPair {
 	@JsonProperty("product_id")
 	@NotNull
 	private Long productId;
@@ -26,7 +26,7 @@ public class SalePair {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
-		SalePair salePair = (SalePair) o;
+		ProductCountPair salePair = (ProductCountPair) o;
 		return productId.equals(salePair.productId) && count.equals(salePair.count);
 	}
 

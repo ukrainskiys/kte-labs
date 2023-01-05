@@ -1,4 +1,4 @@
-package com.example.shop.model.entity;
+package com.example.shop.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;

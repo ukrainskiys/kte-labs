@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rest/sale")
+@RequestMapping("/api/rest/sale")
 @RequiredArgsConstructor
 public class SaleController implements SaleApi {
     private final SaleFactService saleFactService;

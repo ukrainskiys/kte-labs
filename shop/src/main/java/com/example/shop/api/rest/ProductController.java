@@ -11,13 +11,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rest/product")
+@RequestMapping("/api/rest/products")
 @RequiredArgsConstructor
 public class ProductController implements ProductApi {
 	private final ProductService productService;
 
 	@Override
-	@GetMapping("/all")
+	@GetMapping
 	public GetAllProductsResponse all() {
 		return new GetAllProductsResponse(productService.getAllProducts());
 	}

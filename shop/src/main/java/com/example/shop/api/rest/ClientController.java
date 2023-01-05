@@ -9,19 +9,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/rest/client")
+@RequestMapping("/api/rest/client")
 @RequiredArgsConstructor
 public class ClientController implements ClientApi {
 	private final ClientService clientService;
 
 	@Override
-	@GetMapping("/all")
+	@GetMapping
 	public GetAllClientsResponse all() {
 		return new GetAllClientsResponse(clientService.getAllClients());
 	}
 
 	@Override
-	@PostMapping("/discounts")
+	@PutMapping("/discounts")
 	public void discounts(@Valid @RequestBody SetIndividualDiscountsRequest request) {
 		clientService.updateClientDiscounts(request.getId(), request.getDiscountFirst(), request.getDiscountSecond());
 	}

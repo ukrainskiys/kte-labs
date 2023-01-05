@@ -1,6 +1,6 @@
 package com.example.shop.repository;
 
-import com.example.shop.model.entity.Statistic;
+import com.example.shop.domain.model.Statistic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
