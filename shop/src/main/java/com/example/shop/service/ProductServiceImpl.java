@@ -7,7 +7,7 @@ import com.example.shop.domain.model.Client;
 import com.example.shop.domain.model.Product;
 import com.example.shop.domain.model.Rating;
 import com.example.shop.repository.ProductRepository;
-import com.example.shop.controllers.response.CalculateFinalPriceResponse;
+import com.example.shop.controllers.response.SaleCalculateResponse;
 import com.example.shop.controllers.response.ProductInformationResponse;
 import com.example.shop.service.calculate.CalculationResult;
 import com.example.shop.service.calculate.Calculator;
@@ -65,12 +65,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public CalculateFinalPriceResponse calculateFinalPrice(long clientId, List<ProductCountPair> sales) {
+	public SaleCalculateResponse calculateFinalPrice(long clientId, List<ProductCountPair> sales) {
 		Client client = clientService.getClientById(clientId);
 		List<CalculationResult> calculates = calculator.calculate(client, sales);
 		saleFactService.keepFinalCost(client, sales, calculates);
 		long sum = calculates.stream().map(CalculationResult::getSumWithDiscount).mapToLong(MoneyUtils::toKopecks).sum();
-		return new CalculateFinalPriceResponse(sum);
+		return new SaleCalculateResponse(sum);
 	}
 
 	@Override

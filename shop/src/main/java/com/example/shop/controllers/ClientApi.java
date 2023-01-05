@@ -1,9 +1,10 @@
 package com.example.shop.controllers;
 
-import com.example.shop.controllers.request.SetIndividualDiscountsRequest;
-import com.example.shop.controllers.response.GetAllClientsResponse;
+import com.example.shop.controllers.request.ClientIndividualDiscountsRequest;
+import com.example.shop.controllers.response.ClientListResponse;
+import org.springframework.http.ResponseEntity;
 
 public interface ClientApi {
-    GetAllClientsResponse all();
-    void discounts(SetIndividualDiscountsRequest request);
+    ResponseEntity<ClientListResponse> all();
+    ResponseEntity<Void> discounts(ClientIndividualDiscountsRequest request);
 }

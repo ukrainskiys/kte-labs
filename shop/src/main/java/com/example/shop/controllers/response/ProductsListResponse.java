@@ -14,6 +14,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class GetAllProductsResponse {
+public class ProductsListResponse {
     private List<ProductDTO> products;
 }

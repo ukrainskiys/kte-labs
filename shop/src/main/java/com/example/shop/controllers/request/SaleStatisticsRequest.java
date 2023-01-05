@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class GetStatisticsRequest {
+public class SaleStatisticsRequest {
     @JsonProperty("client_id")
     private Long clientId;
     @JsonProperty("product_id")

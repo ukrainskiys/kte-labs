@@ -25,6 +25,9 @@ dependencies {
 
     implementation 'net.sf.dozer:dozer:5.5.1'
 
+    // OpenApi
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
+
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'

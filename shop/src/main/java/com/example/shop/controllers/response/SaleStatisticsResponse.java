@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class GetStatisticsResponse {
+public class SaleStatisticsResponse {
 	@JsonProperty("count_checks")
 	private Integer countChecks;
 	@JsonProperty("total_cost")

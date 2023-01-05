@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class GetAllClientsResponse {
+public class ClientListResponse {
 	private List<ClientDTO> clients;
 }

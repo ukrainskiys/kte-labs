@@ -1,10 +1,10 @@
 package com.example.shop.service;
 
-import com.example.shop.controllers.request.GetStatisticsRequest;
-import com.example.shop.controllers.response.GetStatisticsResponse;
+import com.example.shop.controllers.request.SaleStatisticsRequest;
+import com.example.shop.controllers.response.SaleStatisticsResponse;
 
 public interface StatisticService {
-	GetStatisticsResponse getStatistic(GetStatisticsRequest request);
-	GetStatisticsResponse getClientStatistic(long clientId);
-	GetStatisticsResponse getProductStatistic(long productId);
+	SaleStatisticsResponse getStatistic(SaleStatisticsRequest request);
+	SaleStatisticsResponse getClientStatistic(long clientId);
+	SaleStatisticsResponse getProductStatistic(long productId);
 }

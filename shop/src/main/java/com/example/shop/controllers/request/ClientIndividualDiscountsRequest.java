@@ -1,27 +1,29 @@
 package com.example.shop.controllers.request;
 
-import com.example.shop.domain.ProductCountPair;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class CalculateFinalPriceRequest {
-	@JsonProperty("client_id")
+public class ClientIndividualDiscountsRequest {
 	@NotNull
-	private Long clientId;
-	@NotNull
-	private List<ProductCountPair> products = new ArrayList<>();
+	private Long id;
+	@JsonProperty("discount_first")
+	@Min(1)
+	@Max(100)
+	private Integer discountFirst;
+	@JsonProperty("discount_second")
+	@Min(1)
+	@Max(100)
+	private Integer discountSecond;
 }

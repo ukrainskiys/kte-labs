@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement
-public class CalculateFinalPriceResponse {
+public class SaleCalculateResponse {
 	@JsonProperty("price_kopecks")
 	private long priceKopecks;
 }
